@@ -98,7 +98,8 @@ class Dnn(object):
 
         #Fit the model and save the history for diagnostics
         #additionally pass the testing data for further diagnostic results
-        self.history = self.model.fit(self.data.X_train.as_matrix(), self.data.y_train.as_matrix(), sample_weight=self.data.weights_train,
+        self.history = self.model.fit(self.data.X_train.as_matrix(), self.data.y_train.as_matrix(), 
+                sample_weight=self.data.weights_train,
                 validation_data=(self.data.X_test.as_matrix(),self.data.y_test.as_matrix(),self.data.weights_test),
                 epochs=epochs, batch_size=batch_size,**kwargs)
 
@@ -461,7 +462,7 @@ class Dnn(object):
             # plt.plot((h1[1][:-1]+h1[1][1:])/2,toPlot+error)
             plt.fill_between((h1[1][:-1]+h1[1][1:])/2,toPlot-error,toPlot+error,linewidth=0,alpha=0.6)
             maxIndex=np.argmax(toPlot)
-            plt.title('Systematic '+str(systematic)+', s: '+s[maxIndex]+', b:'+b[maxIndex]+', best significance is '+str(round(toPlot[maxIndex],2))+' +/- '+str(round(error[maxIndex],2)))
+            plt.title('Systematic '+str(systematic)+', s: '+str(round(s[maxIndex],1))+', b:'+str(round(b[maxIndex],1))+', best significance is '+str(round(toPlot[maxIndex],2))+' +/- '+str(round(error[maxIndex],2)))
             plt.xlabel('Cut on classifier score')
             plt.ylabel('Asimov estimate of significance')
             plt.savefig(os.path.join(self.output,'asimovDiscriminatorSyst'+str(systematic).replace('.','p')+'.pdf'))

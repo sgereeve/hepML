@@ -19,6 +19,15 @@ class MlData(object):
         self.isSplit=False
         self.standardised=False #keep track of the train and test set standardisation
         self.standardisedDev=False #keep track of the development test standardisation
+    
+    def output(self,number_of_lines=5):
+
+        print "classifier:\n", self.y[:number_of_lines]
+        print "parametrs:\n", self.X[:number_of_lines]
+        # # for i in range(len(self.y)):
+        # for i in range(number_of_lines):
+        #     print "classifier: ", self.y[i]
+        #     print "parameters: ", self.X[i]
 
     def split(self, evalSize=0.0, testSize=0.33,limitSize=None):
         # (thanks Tim Head https://betatim.github.io/posts/sklearn-for-TMVA-users/ )
